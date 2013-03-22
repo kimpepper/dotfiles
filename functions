@@ -1,0 +1,9 @@
+# Change dir to git root
+function cgr() { 
+  cd $(dirname $(__gitdir)); 
+}
+
+# At github pull request fetches
+function pullify() {
+  git config --add remote.origin.fetch '+refs/pull/*/head:refs/remotes/origin/pr/*'
+}

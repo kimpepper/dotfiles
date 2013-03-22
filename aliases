@@ -1,0 +1,52 @@
+alias ack='ack -riu'
+alias dr="drush"
+
+# Aliases for common drush commands that work in a global context.
+alias dr='drush'
+alias ddd='drush drupal-directory'
+alias dl='drush pm-download'
+alias ev='drush php-eval'
+alias sa='drush site-alias'
+alias lsa='drush site-alias --local'
+alias st='drush core-status'
+alias use='drush site-set'
+
+# Aliases for drush commands that work on the current drupal site
+alias cc='drush cache-clear'
+alias cca='drush cache-clear all'
+alias dis='drush pm-disable'
+alias en='drush pm-enable'
+alias pmi='drush pm-info'
+alias pml='drush pm-list'
+alias rf='drush pm-refresh'
+alias unin='drush pm-uninstall'
+alias up='drush pm-update'
+alias upc='drush pm-updatecode'
+alias updb='drush updatedb'
+
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+  colorflag="--color"
+else # OS X `ls`
+  colorflag="-G"
+fi
+
+# Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; sudo gem update'
+
+# View HTTP traffic
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+
+# Empty the Trash on all mounted volumes and the main HDD
+# Also, clear Apple’s System Logs to improve shell startup speed
+alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+
+# PlistBuddy alias, because sometimes `defaults` just doesn’t cut it
+alias plistbuddy="/usr/libexec/PlistBuddy"
+
+# Intuitive map function
+# For example, to list all directories that contain a certain file:
+# find . -name .gitattributes | map dirname
+alias map="xargs -n1"
+
