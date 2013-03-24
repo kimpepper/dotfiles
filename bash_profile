@@ -35,5 +35,11 @@ complete -W "NSGlobalDomain" defaults
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall
 
+# If a boxen machine, source boxen env
+[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+
 # If possible, add tab completion for many more commands
-[ -f /etc/bash_completion ] && source /etc/bash_completion
+[ -f $BOXEN_HOME/etc/homebrew/etc/bash_completion.d/git-completion.bash ] && source $BOXEN_HOME/etc/homebrew/etc/bash_completion.d/git-completion.bash
+
+# Add support for PS1 git info
+[ -f $HOME/.git-prompt.sh ] && source .git-prompt.sh
