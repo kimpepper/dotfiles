@@ -42,3 +42,6 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 
 # Add support for PS1 git info
 [ -f `brew --prefix git`/share/git-core/contrib/completion/git-prompt.sh ] && source `brew --prefix git`/share/git-core/contrib/completion/git-prompt.sh
+
+# initialise rbenv
+eval "$(rbenv init -)"
