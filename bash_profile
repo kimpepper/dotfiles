@@ -38,8 +38,7 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 # If a boxen machine, source boxen env
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 
-# If possible, add tab completion for many more commands
-[ -f $BOXEN_HOME/etc/homebrew/etc/bash_completion.d/git-completion.bash ] && source $BOXEN_HOME/etc/homebrew/etc/bash_completion.d/git-completion.bash
+[ -f `brew --prefix bash-completion`/etc/bash_completion ] && source `brew --prefix bash-completion`/etc/bash_completion
 
 # Add support for PS1 git info
-[ -f $HOME/.git-prompt.sh ] && source .git-prompt.sh
+[ -f `brew --prefix git`/share/git-core/contrib/completion/git-prompt.sh ] && source `brew --prefix git`/share/git-core/contrib/completion/git-prompt.sh
