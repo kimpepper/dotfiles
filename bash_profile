@@ -4,7 +4,7 @@ export PATH="$HOME/bin:$PATH"
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.{bash_prompt,exports,aliases,functions,extra}; do
 	[ -r "$file" ] && source "$file"
 done
 unset file
@@ -38,6 +38,8 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 # If a boxen machine, source boxen env
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 
+[ -r .path ] && source .path
+
 [ -f `brew --prefix bash-completion`/etc/bash_completion ] && source `brew --prefix bash-completion`/etc/bash_completion
 
 # Add support for PS1 git info
@@ -45,3 +47,11 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 
 # initialise rbenv
 eval "$(rbenv init -)"
+
+# Invoke java with the $DYLD_LIBRARY_PATH set with the homebrew lib dir.
+# This allows java to load native libraries installed via homebrew.
+# export DYLD_FALLBACK_LIBRARY_PATH="$BOXEN_HOME/homebrew/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+
+if [ -x /usr/libexec/java_home ]; then
+  export JAVA_HOME=`/usr/libexec/java_home`
+fi
