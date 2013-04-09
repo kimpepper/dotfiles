@@ -24,6 +24,11 @@ alias up='drush pm-update'
 alias upc='drush pm-updatecode'
 alias updb='drush updatedb'
 
+#phing aliases
+alias ph='phing'
+alias phb='phing build'
+alias phbi='phing build install'
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
   colorflag="--color"
