@@ -10,7 +10,13 @@ function pullify() {
 
 # re-install drupal 8
 dsi8() {
-  sudo rm -rf sites/default/files/* && sudo chmod 777 sites/default/files && drush si standard --sites-subdir=default --uri=http://drupal-8.dev -y && drush dis overlay -y && drush en devel simpletest -y && sudo chmod -R 777 sites/default/files && drush uli
+  sudo rm -rf sites/default/files/*
+  # sudo chmod 777 sites/default/files
+  dr7 si standard --sites-subdir=default --uri="http://drupal-8.dev" -y --db-url=mysql://root:@localhost/drupal_8
+  dr7 en simpletest -y
+  #dr7 en devel -y
+  # sudo chmod -R 777 sites/default/files
+  dr7 --uri=http://drupal-8.dev:80 uli
 }
 
 # prune merged git branches
@@ -23,7 +29,7 @@ gprune() {
   git remote prune origin
  
   # Remove local fully merged branches
-  git branch --merged master | grep -v 'master$' | xargs git branch -d
+  git branch --merged master | grep -vE 'releases|master$' | xargs git branch -d
  
   # Show remote fully merged branches
   echo "The following remote branches are fully merged and will be removed:"
@@ -38,4 +44,21 @@ gprune() {
      echo "Done!"
      echo "Obsolete branches are removed"
   fi
+}
+
+gprunecore() {
+ git branch | grep -vE '6.x$|7.x$|8.x$|9.x$' | xargs git branch -D
+}
+
+# run phing from a subdirectory
+ph() {
+  path=$(pwd)
+  while [[ "$path" != "" && ! -e "$path/build.xml" ]]; do
+    path=${path%/*}
+  done
+  (cd $path && phing $@)
+}
+
+gcommits() {
+  git log --oneline --grep=$@ | wc -l
 }

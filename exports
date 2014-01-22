@@ -17,3 +17,8 @@ export LESS_TERMCAP_md="$ORANGE"
 
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X"
+export AWS_CONFIG_FILE=$HOME/.aws/config
+
+# export CPATH=/opt/boxen/homebrew/include
+# export DYLD_LIBRARY_PATH=/opt/boxen/homebrew/lib
+# export ARCHFLAGS='-arch x86_64'
