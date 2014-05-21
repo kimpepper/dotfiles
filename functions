@@ -59,6 +59,12 @@ ph() {
   (cd $path && phing $@)
 }
 
+# Shows the commit count for the specified grep text
 gcommits() {
   git log --oneline --grep=$@ | wc -l
+}
+
+# Makes a curl request that just shows the headers.
+curlh() {
+	curl -D - $@ -o /dev/null 
 }
