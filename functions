@@ -12,11 +12,11 @@ function pullify() {
 dsi8() {
   sudo rm -rf sites/default/files/*
   # sudo chmod 777 sites/default/files
-  dr7 si standard --sites-subdir=default --uri="http://drupal-8.dev" -y --db-url=mysql://root:@localhost/drupal_8
-  dr7 en simpletest -y
-  #dr7 en devel -y
+  drush si standard --sites-subdir=default --uri="http://drupal-8.dev" -y --db-url=mysql://root:@localhost/drupal_8
+  # drush en simpletest -y
+  # dr7 en devel -y
   # sudo chmod -R 777 sites/default/files
-  dr7 --uri=http://drupal-8.dev:80 uli
+  drush -l drupal-8.dev uli
 }
 
 # prune merged git branches

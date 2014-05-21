@@ -1,3 +1,3 @@
 # Customise the path
 
-export PATH=$HOME/bin:$HOME/bin/AWS-ElasticBeanstalk-CLI-2.6.0/eb/macosx/python2.7:`brew --prefix php54`/bin:$PATH
+export PATH=$HOME/.composer/vendor/bin:`brew --prefix php54`/bin:$PATH
