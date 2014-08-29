@@ -12,11 +12,14 @@ function pullify() {
 dsi8() {
   sudo rm -rf sites/default/files/*
   # sudo chmod 777 sites/default/files
-  drush si standard --sites-subdir=default --uri="http://drupal-8.dev" -y --db-url=mysql://root:@localhost/drupal_8
-  # drush en simpletest -y
+  drush si standard --sites-subdir=default --uri="http://drupal-8.dev" -y --db-url=mysql://root:@localhost/drupal_8 --notify
+  drush en simpletest -y
   # dr7 en devel -y
   # sudo chmod -R 777 sites/default/files
   drush -l drupal-8.dev uli
+	drush -l drupal-8.dev upwd admin --password=admin
+	# drush dl --yes --cache webprofiler-8.x-1.x-dev
+	# drush en --yes webprofiler
 }
 
 # prune merged git branches
@@ -29,7 +32,7 @@ gprune() {
   git remote prune origin
  
   # Remove local fully merged branches
-  git branch --merged master | grep -vE 'releases|master$' | xargs git branch -d
+  git branch --merged master | grep -vE 'releases|master|8.x$' | xargs git branch -d
  
   # Show remote fully merged branches
   echo "The following remote branches are fully merged and will be removed:"
@@ -67,4 +70,9 @@ gcommits() {
 # Makes a curl request that just shows the headers.
 curlh() {
 	curl -D - $@ -o /dev/null 
+}
+
+# Run phpstorm with current directory
+pst() {
+  pstorm `pwd`
 }

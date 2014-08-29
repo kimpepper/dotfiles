@@ -27,6 +27,17 @@ alias cca='drush cache-clear all'
 # alias upc='drush pm-updatecode'
 # alias updb='drush updatedb'
 
+# Aliases for git commands
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias go='git checkout '
+
+# Open the drupal issue for the current branch
+alias dri="open /Applications/Google\ Chrome.app https://www.drupal.org/node/\$(git symbolic-ref -q HEAD 2>/dev/null | sed 's/^refs\/heads\/\([0-9]*\).*/\1/')"
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
   colorflag="--color"

@@ -1,6 +1,6 @@
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you donât want to commit.
+# * ~/.extra can be used for other settings you donÃ¢ÂÂt want to commit.
 for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
 	[ -r "$file" ] && source "$file"
 done
@@ -32,9 +32,6 @@ complete -W "NSGlobalDomain" defaults
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall
 
-# If a boxen machine, source boxen env
-[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
-
 [ -r .path ] && source .path
 
 [ -f `brew --prefix bash-completion`/etc/bash_completion ] && source `brew --prefix bash-completion`/etc/bash_completion
@@ -45,14 +42,8 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 # initialise rbenv
 eval "$(rbenv init -)"
 
+# initialise hub
+eval "$(hub alias -s)"
+
 # initialise phpenv
 # eval "$(phpenv init -)"
-
-# Invoke java with the $DYLD_LIBRARY_PATH set with the homebrew lib dir.
-# This allows java to load native libraries installed via homebrew.
-# export DYLD_FALLBACK_LIBRARY_PATH="$BOXEN_HOME/homebrew/lib:$DYLD_FALLBACK_LIBRARY_PATH"
-
-if [ -x /usr/libexec/java_home ]; then
-  export JAVA_HOME=`/usr/libexec/java_home`
-fi
-
