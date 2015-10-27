@@ -1,5 +1,6 @@
 alias ack='ack -riu'
-# alias drush=$HOME/bin/drush/drush
+alias ll='ls -l'
+
 alias dr="drush"
 
 # Aliases for common drush commands that work in a global context.
@@ -29,11 +30,17 @@ alias cca='drush cache-clear all'
 
 # Aliases for git commands
 alias gs='git status '
+alias gsh='git show '
 alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
 alias gd='git diff'
 alias go='git checkout '
+alias gup='git pull --rebase '
+alias gl='git log --decorate --graph  '
+alias gpr='git pull-request '
+# alias com=!sh -c "br=`git symbolic-ref HEAD|sed s#refs/heads/##|cut -d\"-\" -f1`; git commit -em \"[#\${br}] $1\""
+alias gbp='git browse -- pulls'
 
 # Open the drupal issue for the current branch
 alias dri="open /Applications/Google\ Chrome.app https://www.drupal.org/node/\$(git symbolic-ref -q HEAD 2>/dev/null | sed 's/^refs\/heads\/\([0-9]*\).*/\1/')"
@@ -65,3 +72,7 @@ alias plistbuddy="/usr/libexec/PlistBuddy"
 alias map="xargs -n1"
 
 alias gen_ctags='ctags --langmap=php:.engine.inc.module.theme.php.install.test.profile --php-kinds=cdfi --languages=php --recurse --exclude="\.git" --exclude="\.svn" --exclude="\.hg" --exclude="\.bzr" --exclude="CVS" --totals=yes --tag-relative=yes --regex-PHP="/abstract\s+class\s+([^ ]+)/\1/c/" --regex-PHP="/interface\s+([^ ]+)/\1/c/" --regex-PHP="/(public\s+|static\s+|abstract\s+|protected\s+|private\s+)function\s+\&?\s*([^ (]+)/\2/f/"'
+
+
+alias pathauto-test='php ~/dev/drupal/drupal/core/scripts/run-tests.sh --verbose --color --concurrency 4 --php `which php` --url http://drupal-8.dev "pathauto"'
+

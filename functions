@@ -1,6 +1,8 @@
 # Change dir to git root
-function cgr() { 
-  cd $(dirname $(__gitdir)); 
+function cgr() {
+	if [ -n "$(__gitdir)" ]; then
+  	cd $(dirname $(__gitdir))
+  fi
 }
 
 # At github pull request fetches
@@ -17,7 +19,7 @@ dsi8() {
   # dr7 en devel -y
   # sudo chmod -R 777 sites/default/files
   drush -l drupal-8.dev uli
-	drush -l drupal-8.dev upwd admin --password=admin
+	# drush -l drupal-8.dev upwd admin --password=admin
 	# drush dl --yes --cache webprofiler-8.x-1.x-dev
 	# drush en --yes webprofiler
 }
@@ -59,7 +61,21 @@ ph() {
   while [[ "$path" != "" && ! -e "$path/build.xml" ]]; do
     path=${path%/*}
   done
-  (cd $path && phing $@)
+  cd $path
+	if [ -f bin/phing ]; then
+		bin/phing $@
+	else
+		phing $@
+	fi
+	cd -> /dev/null 2>&1
+}
+
+dr7() {
+	if [ -f bin/drush ]; then
+		bin/drush $@
+	else
+	  drush $@
+	fi
 }
 
 # Shows the commit count for the specified grep text
@@ -75,4 +91,9 @@ curlh() {
 # Run phpstorm with current directory
 pst() {
   pstorm `pwd`
+}
+
+# Open a Drupal node page.
+dn() {
+	open "https://www.drupal.org/node/$1"
 }
