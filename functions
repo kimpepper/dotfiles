@@ -24,28 +24,46 @@ dsi8() {
 	# drush en --yes webprofiler
 }
 
-# prune merged git branches
+# Prune merged git branches from local and remote
+# example usage: gprune 8.x-1.x
 gprune() {
-  # This has to be run from master
-  git checkout master
- 
+
+  DEFAULT_BRANCH=master
+  PROTECTED_BRANCH_PATTERN='|master|releases|7.x.*|8.x.*'
+
+
+  # Allow the base branch to be passed in as 1st param.
+  base_branch=${1-$DEFAULT_BRANCH}
+  echo "Base branch:              $base_branch"
+
+  # Regex for protected branches.
+  protected_branches=$base_branch$PROTECTED_BRANCH_PATTERN
+  echo "Protected branches regex: $protected_branches"
+
+  # This has to be run from base branch
+  git checkout $base_branch
+
   # Update our list of remotes
   git fetch
   git remote prune origin
- 
+
   # Remove local fully merged branches
-  git branch --merged master | grep -vE 'releases|master|8.x$' | xargs git branch -d
- 
+  git branch --merged $base_branch | grep -vE "$protected_branches" | xargs git branch -d
+
   # Show remote fully merged branches
   echo "The following remote branches are fully merged and will be removed:"
-  git branch -r --merged master | sed 's/ *origin\///' | grep -v 'master$'
- 
+  git branch -r --merged $base_branch \
+    | sed 's/ *origin\///' \
+    | grep -vE "$protected_branches"
+
   read -p "Continue (y/n)? "
   if [ "$REPLY" == "y" ]
   then
      # Remove remote fully merged branches
-     git branch -r --merged master | sed 's/ *origin\///' \
-               | grep -vE 'releases|master$' | xargs -I% git push origin :%
+     git branch -r --merged $base_branch \
+       | sed 's/ *origin\///' \
+       | grep -vE "$protected_branches" \
+       | xargs -I% git push origin :%
      echo "Done!"
      echo "Obsolete branches are removed"
   fi
@@ -85,7 +103,7 @@ gcommits() {
 
 # Makes a curl request that just shows the headers.
 curlh() {
-	curl -D - $@ -o /dev/null 
+	curl -D - $@ -o /dev/null
 }
 
 # Run phpstorm with current directory
