@@ -1,5 +1,8 @@
 alias ack='ack -riu'
-alias ll='ls -l'
+alias ll='ls -lGafh'
+
+# Docker aliases
+alias de='docker-compose exec'
 
 alias dr="drush"
 
@@ -29,18 +32,21 @@ alias cca='drush cache-clear all'
 # alias updb='drush updatedb'
 
 # Aliases for git commands
+alias gut='git'
+alias got='git'
 alias gs='git status '
 alias gsh='git show '
 alias ga='git add '
-alias gb='git branch '
-alias gc='git commit'
+#alias gb='git branch '
+#alias gc='git commit'
 alias gd='git diff'
-alias go='git checkout '
+#alias go='git checkout '
 alias gup='git pull --rebase '
 alias gl='git log --decorate --graph  '
 alias gpr='git pull-request '
 # alias com=!sh -c "br=`git symbolic-ref HEAD|sed s#refs/heads/##|cut -d\"-\" -f1`; git commit -em \"[#\${br}] $1\""
 alias gbp='git browse -- pulls'
+alias dpatch='curl $@ | git apply --index --reject'
 
 # Open the drupal issue for the current branch
 alias dri="open /Applications/Google\ Chrome.app https://www.drupal.org/node/\$(git symbolic-ref -q HEAD 2>/dev/null | sed 's/^refs\/heads\/\([0-9]*\).*/\1/')"
@@ -76,3 +82,9 @@ alias gen_ctags='ctags --langmap=php:.engine.inc.module.theme.php.install.test.p
 
 alias pathauto-test='php ~/dev/drupal/drupal/core/scripts/run-tests.sh --verbose --color --concurrency 4 --php `which php` --url http://drupal-8.dev "pathauto"'
 
+alias db="dashboard-console"
+
+alias ec2ls="aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[?Key==\`Name\`].Value[], InstanceId, State.Name]' --output=text"
+
+alias dc='docker-compose -f docker-compose.osx.yml'
+alias cd..="cd .."

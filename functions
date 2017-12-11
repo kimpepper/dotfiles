@@ -115,3 +115,9 @@ pst() {
 dn() {
 	open "https://www.drupal.org/node/$1"
 }
+
+# Checks to see if anything is listening on a port.
+function check_port() {
+  sudo lsof -n -i4TCP:$1 | grep LISTEN
+}
+

@@ -1,6 +1,7 @@
 [user]
 	name = Kim Pepper
 	email = kim@pepper.id.au
+	signingkey = 35D8CDD29F83DB56
 
 [color]
 	branch = auto
@@ -16,7 +17,7 @@
     co = checkout
     s = status
     c = commit
-    d = diff --color-words --word-diff-regex="[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+" -M10%
+    d = diff #--color-words --word-diff-regex="[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+" -M10%
     desc = describe --tags
     a = add
     b = branch
@@ -24,6 +25,7 @@
     l = log --decorate --graph 
     m = merge
     p = push
+    pul = pull
     r = rebase
     re = reset
     sh = show
@@ -33,10 +35,10 @@
     # com=!sh -c "br=`git symbolic-ref HEAD|sed s#refs/heads/##|cut -d\"-\" -f1`; git commit -em \"[#\${br}] $1\""
     interdiff=!git diff > ~/patches/interdiff.txt
     interdiff-stg=!git diff --staged > ~/patches/interdiff.txt
-    genpatch=!sh -c "br=`git symbolic-ref HEAD|sed s#refs/heads/##`; git diff origin/8.x > ${br}.$1.patch"
+    genpatch=!sh -c "br=`git symbolic-ref HEAD|sed s#refs/heads/##`; git diff origin/8.0.x > ${br}.$1.patch"
     rebase8x=!git fetch origin && git rebase origin/8.x
     merge8x=!git fetch origin && git merge origin/8.x
-    fetch-patch=!sh -c "curl $1 | git apply --index --reject"
+    fetch-patch=!sh -c 'curl "$1" | git apply -3 -v' -
     excluded=ls-files --others --exclude-from=.git/info/exclude
 [instaweb]
     local = true
@@ -51,7 +53,7 @@
 	autocrlf = input
 
 [diff]
-  tool = pstorm
+
 [difftool]
   prompt = false
 [difftool.pstorm]
@@ -63,8 +65,15 @@
 
 [push]
 	default = current
+	followTags = true
 
 [github]
 	user = kimpepper
 [credential]
 	helper = osxkeychain
+[commit]
+	gpgsign = true
+[gpg]
+	program = /usr/local/bin/gpg
+[help]
+	autocorrect = 10

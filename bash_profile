@@ -1,7 +1,7 @@
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you donÃ¢ÂÂt want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.{path,exports,aliases,functions,extra}; do
 	[ -r "$file" ] && source "$file"
 done
 unset file
@@ -45,5 +45,42 @@ eval "$(rbenv init -)"
 # initialise hub
 eval "$(hub alias -s)"
 
-# initialise phpenv
-# eval "$(phpenv init -)"
+# initialise drupal console
+#source "$HOME/.console/console.rc" 2>/dev/null
+
+# Initialise scaffold
+# eval $(scaffold _completion --generate-hook)
+
+#export NVM_DIR="/Users/kim/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+
+# Include Drush bash customizations.
+if [ -f "/Users/kim/.drush/drush.bashrc" ] ; then
+  source /Users/kim/.drush/drush.bashrc
+fi
+
+
+# Include Drush completion.
+if [ -f "/Users/kim/.drush/drush.complete.sh" ] ; then
+  source /Users/kim/.drush/drush.complete.sh
+fi
+
+
+# Include Drush prompt customizations.
+#if [ -f "/Users/kim/.drush/drush.prompt.sh" ] ; then
+#  source /Users/kim/.drush/drush.prompt.sh
+#fi
+
+#if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
+#    source ~/.gnupg/.gpg-agent-info
+#    export GPG_AGENT_INFO
+#else
+#    eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
+#fi
+
+
