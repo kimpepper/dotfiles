@@ -32,3 +32,10 @@ XDEBUG_CONFIG="idekey=PHPSTORM"
 if [ -x /usr/libexec/java_home ]; then
   export JAVA_HOME=`/usr/libexec/java_home`
 fi
+
+export GOPATH=$HOME/go
+
+export GPG_TTY=$(tty)
+
+export SHERLOCK_S3_BUCKET=pnx-watson
+
