@@ -33,9 +33,10 @@
     up = pull --rebase
     changelog = log --no-merges --reverse --pretty=format:'* %h: %s - %an'
     # com=!sh -c "br=`git symbolic-ref HEAD|sed s#refs/heads/##|cut -d\"-\" -f1`; git commit -em \"[#\${br}] $1\""
-    interdiff=!git diff > ~/patches/interdiff.txt
-    interdiff-stg=!git diff --staged > ~/patches/interdiff.txt
-    genpatch=!sh -c "br=`git symbolic-ref HEAD|sed s#refs/heads/##`; git diff origin/8.0.x > ${br}.$1.patch"
+    #interdiff=!git diff > ~/patches/interdiff.txt
+    #interdiff-stg=!git diff --staged > ~/patches/interdiff.txt
+    interdiff="!sh -c \"br=`git symbolic-ref HEAD|sed s#refs/heads/##`; git diff HEAD^ > \\${br}-$1-interdiff.txt\""
+    genpatch="!sh -c \"br=`git symbolic-ref HEAD|sed s#refs/heads/##`; git diff origin/8.7.x > \\${br}-$1.patch\""
     rebase8x=!git fetch origin && git rebase origin/8.x
     merge8x=!git fetch origin && git merge origin/8.x
     fetch-patch=!sh -c 'curl "$1" | git apply -3 -v' -

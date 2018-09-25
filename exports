@@ -38,4 +38,5 @@ export GOPATH=$HOME/go
 export GPG_TTY=$(tty)
 
 export SHERLOCK_S3_BUCKET=pnx-watson
+export SHERLOCK_BUCKET=pnx-watson
 

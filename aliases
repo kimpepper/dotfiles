@@ -41,9 +41,10 @@ alias ga='git add '
 #alias gc='git commit'
 alias gd='git diff'
 #alias go='git checkout '
+alias gp='git pull'
 alias gup='git pull --rebase '
-alias gl='git log --decorate --graph  '
-alias gpr='git pull-request '
+alias gl='git log --decorate --graph --relative-date '
+alias gpr='git push && git pull-request '
 # alias com=!sh -c "br=`git symbolic-ref HEAD|sed s#refs/heads/##|cut -d\"-\" -f1`; git commit -em \"[#\${br}] $1\""
 alias gbp='git browse -- pulls'
 alias dpatch='curl $@ | git apply --index --reject'
@@ -87,4 +88,5 @@ alias db="dashboard-console"
 alias ec2ls="aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[?Key==\`Name\`].Value[], InstanceId, State.Name]' --output=text"
 
 alias dc='docker-compose -f docker-compose.osx.yml'
+alias dbash='dc exec app bash'
 alias cd..="cd .."

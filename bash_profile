@@ -45,6 +45,9 @@ eval "$(rbenv init -)"
 # initialise hub
 eval "$(hub alias -s)"
 
+# Composer autocomplete
+eval "$(symfony-autocomplete)"
+
 # initialise drupal console
 #source "$HOME/.console/console.rc" 2>/dev/null
 
@@ -58,6 +61,7 @@ powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
 . /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+#. $HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh
 
 # Include Drush bash customizations.
 if [ -f "/Users/kim/.drush/drush.bashrc" ] ; then

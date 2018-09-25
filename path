@@ -1,4 +1,4 @@
 # Customise the path
 
-export PATH=/usr/local/bin:/usr/local/sbin:$HOME/.composer/vendor/bin:$HOME/.go/bin:$HOME/.yarn/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/.composer/vendor/bin:$HOME/go/bin:$HOME/.yarn/bin:$PATH
 
